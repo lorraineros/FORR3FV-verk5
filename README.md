@@ -9,6 +9,9 @@
 Ég náði að láta myndavélin að greina lit og circle. Ég náði samt ekki að láta SVG að breyta lit. 
 Vídeo: https://youtu.be/oTg6YmR-0nA
 
+## Heimildir
+https://www.geeksforgeeks.org/multiple-color-detection-in-real-time-using-python-opencv/
+
 ## Höfundur
 * Lorraine Rós
 * FORR3FV05EU
