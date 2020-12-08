@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color detect</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8  offset-lg-2">
+            <h1 class="mt-5">Color detection
+
+            </h1>
+            <br>
+            <img src="{{ url_for('video_feed') }}">
+            <span>
+             <svg id="svg" height="200" width="200">
+                 <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="orange" />
+             </svg>
+        </span>
+        </div>
+
+    </div>
+</div>
+<style type="text/css">
+body{
+    text-align: center;
+}
+</style>
+</body>
+</html>

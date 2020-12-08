@@ -2,10 +2,7 @@ import numpy as np
 import argparse
 import imutils
 import cv2
-import drawSvg as draw
-
-
-d = draw.Drawing(200, 100, origin='center', displayInline=False)
+import urllib
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-v", "--video",
@@ -32,12 +29,9 @@ if not args.get("video", False):
 else:
     camera = cv2.VideoCapture(args["video"])
 # keep looping
-while True:
-
+def camera_stream():
     (grabbed, frame) = camera.read()
-
-    if args.get("video") and not grabbed:
-        break
+    frame = cv2.flip(frame, 1)
 
     frame = imutils.resize(frame, width=600)
 
@@ -59,24 +53,10 @@ while True:
             c = max(cnts, key=cv2.contourArea)
             ((x, y), radius) = cv2.minEnclosingCircle(c)
             M = cv2.moments(c)
-            center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
-
 
             if radius > 0.5:
-
-
-                cv2.circle(frame, (int(x), int(y)), int(radius), colors[key], 2)
+                cv2.circle(frame, (int(x), int(y)), int(radius), colors[key], -1)
                 cv2.putText(frame, key, (int(x - radius), int(y - radius)), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
                             colors[key], 2)
 
-
-    cv2.imshow("Frame", frame)
-
-    key = cv2.waitKey(1) & 0xFF
-
-    if key == ord("q"):
-        break
-
-
-camera.release()
-cv2.destroyAllWindows()
+            return cv2.imencode('.jpg', frame)[1].tobytes()
